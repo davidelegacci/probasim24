@@ -4,4 +4,4 @@ This is the website for the practical sessions of the the "Probabilit&eacute;s e
 
 [Jonatha Anselmi](mailto:jonatha.anselmi@inria.fr) is in charge of the lectures and [Davide Legacci](mailto:davide.legacci@univ-grenoble-alpes.fr) will help with practical sessions (TD).
 
-See the [official page]([https://ade-uga-ro-vs.grenet.fr/direct/index.jsp](https://github.com/jonatha-anselmi/INFO4-PS/blob/master/README.md)) for further information.
+See the [official page](https://github.com/jonatha-anselmi/INFO4-PS) for further information.
