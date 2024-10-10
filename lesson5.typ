@@ -124,6 +124,15 @@ $<cor:exp-of-conditional-exp>
 whenever all the RVs involved are integrable.
 ]
 
+#takeaway[
+  - Let $xvar from jet to xvals$ and $yvar from jet to yvals$ be random variables.
+  - The law of $xvar$ is $xval mapsto probof(xvar = xval)$
+  - The expectation of $xvar$ is $exof(xvar) = sum_(xval in xvals) xval probof(xev)$
+  - The conditional law of $xvar$ given $(yev)$ is $xval mapsto probof(xev given yev)$
+  - The conditional expectation of $xvar$ given $yvar$ is $exof(xvar given yvar) = psi(yvar) $ with
+  - $psi(yval) = sum_(xval in xvals) xval probof(xev given yev) $
+  ]
+
 ////////////////////////////////////////////////////////////////////////
 
 
