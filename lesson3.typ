@@ -194,7 +194,7 @@ law(k) = choose(n_(1) + n_(2), k) p^(k) (1-p)^(n_(1) + n_(2) - k)
 $
 namely $var_(1) + var_(2) follow bern(n_(1) + n_(2), p)$.
 
-#exercise(name: "Sum of independent Poisson distributions")[Let $var_(i) follow poiss(lambda_i)$ with $i in {1,2}$ be independent discrete random variables following the Poisson law. Find the law of $var_(1) + var_(2)$.]
+#exercise(name: "Sum of independent Poisson distributions")[Let $var_(i) follow poiss(lambda_i)$ with $i in {1,2}$ be independent discrete random variables following the Poisson law. Find the law of $var_(1) + var_(2)$.]<ex:sum-poisson>
 
 _Hint: c.f. previous exercise and binomial theorem._
 

@@ -30,7 +30,7 @@
 #show: tail => thm-reset-counter-heading-at("exercise-group", 1, tail)
 ////////////////////////
 
-= Theory recap 2.10.24
+= Theory recap 3.10.24
 Recall from last week that
 #takeaway[
 - $probspace$ with $prob from events to clint$ and $prob(points) = 1$
@@ -39,6 +39,7 @@ Recall from last week that
 ]
 
 == Expected value of a discrete random variable
+<sec:expected-value>
 In this section when we say _"$var$ is a RV"_ we mean "_$var from points to values subset #R$ is a discrete random variable with real values._"
 
 #definition(name: "Expected value")[
@@ -221,104 +222,6 @@ g/l =  (1-p)/p.
 $
 Thus as the probability $p$ to hit the target goes to zero, a very big $g/l$ is required to guarantee an expected gain of zero; viceversa $g/l$ becomes infinitely small as $p to 1$. At $p = 0.5$, as one would expect, $g = l$. 
 
-#let win = $1$
-#let lose = $0$
-#let inbet = $b_(1)$
-
-#let pwin = $p$
-#let plost = $q$
-
-#exercise(name: "Double your bet")[
-Let $var_(n) follow bern(pwin)$, $n =  1, 2, 3, 4 dots$ be a sequence of independent Bernoulli variables (set $prob(var = lose) = plost$ and $prob(var = win) = pwin$ with $plost + pwin = 1$, $plost > 0$, $pwin > 0$). Fix a number $inbet > 0$. Before each $var_(n)$ is drawn, you bet on the outcome $var_n = win$ the amount $b_(n)$ defined recursively by $b_(n) = 2 b_(n-1)$. If you win the bet, you receive $g_(n) = 2b_(n)$ and the game ends; else, you keep going.
-+ What is your final gain?
-+ What is the expected amount of money bet?
-]
-First, note that the amount placed on the $n$-th bet can be written as $b_(n) = 2^(n-1)inbet$. Let's then write down explicitely the process:
-#line(length: 100%)
-0. You bet $b_(1)$ on the event $var_(1) = win$;
-+ $var_(1)$ is drawn:
-  - if $var_(1) = win$, you get $g_(1)$ and the game ends;
-  - else, you bet $b_(2)$ on the event $var_(2) = win$.
-
-+ $var_(2)$ is drawn:
-  - if $var_(2) = win$, you get $g_(2)$ and the game ends;
-  - else, you bet $b_(3)$ on the event $var_(3) = win$.
-
-$dots$
-
-n. $var_(n)$ is drawn:
-  - if $var_(n) = win$, you get $g_(n)$ and the game ends;
-  - else, you bet $b_(n+1)$ on the event $var_(n+1) = win$.
-
-$dots$
-#line(length: 100%)
-
-*Final gain*
-
-After placing $n$ bets the invested amount is 
-$
-B_(n)
-= sum_(k = 1)^(n)b_(k)
-= sum_(k = 1)^(n) inbet 2^(k-1)
-= inbet sum_(l = 0)^(n-1)2^(l)
-= inbet (1-2^(n))/(1-2) = inbet (2^(n)-1) .
-$<eq:bet-after-n>
-If the $n$-th placed bet is the winning one you receive $g_(n) = 2b_(n)$ and the game ends, so your final gain is always
-$
-2b_(n) - B_(n) =  2^(n) inbet - (2^(n)-1) inbet =  inbet.
-$
-This result is surprising: with this strategy (doubling your bet until you win), no matter how big $n$ is (that is, how late you win) and how small the probability $p$ to win is, _at the end of the day you go home with a net gain equal to your initial bet_. But before running to the closest casino, beware! If the probability to win is sufficiently small this well known strategy#footnote[
-#link("https://en.wikipedia.org/wiki/Martingale_(betting_system)")[Martingale betting system] and
-#link("https://johnwoodsspace5.quora.com/Is-the-martingale-strategy-legal-on-betting-sites")[some]
-#link("https://www.kingcasino.com/blog/is-martingale-strategy-allowed-in-casinos/")[random]
-#link("https://www.quora.com/Do-casinos-ban-Martingale")[discussions]
-on the matter.
-] can lead you to invest colossal sums which may well bankrupt you before you get your win.
-
-*Expected bet amount*
-The first occurrence of a winning bet is described by a random variable $var follow geo(p)$ with values $values = {1, 2, 3, ...} in.rev n$. After placing $n$ bets, the amount of invested money is the function $B from values to #R$ with $B_(n) = inbet(2^(n)-1) $ as per @eq:bet-after-n. By @th:expectation-function and @eq:geometric-law the expected amount of money bet is
-$
-ex(B(X)) = sum_(n = 1)^(infinity) B_(n)prob(var = n) =  sum_(n = 1)^(infinity) B_(n) (1-pwin)^(n-1) pwin
-$
-For clarity let's write down more explicitely what is going on, recalling that $prob(var_(run) = lose) = plost$ is the probabiloty to lose each bet and $prob(var_(run) = win) = pwin$ is the probability to win each bet, with $plost + pwin = 1$.
-$
-ex(B(X)) & 
-= b_(1) && prob(var_(1) = win) + \
-& + (b_(1) + b_(2)) && prob( var_(1) = lose, var_(2) = win ) + \
-& + (b_(1) + b_(2) + b_(3)) && prob( var_(1) = lose, var_(2) = lose, var_(3) = win ) + \
-& + dots + \
-& + (b_(1) + dots + b_(n)) && prob( var_(1) = lose, dots, var_(n-1) = lose, var_(n) = win )
-& + dots \
-$
-Then
-$
-ex(B(X)) 
-& = inbet sum_(n = 1)^(infinity) (2^(n)-1) plost^(n-1) pwin \
-& = inbet  pwin / plost sum_(n = 1)^(infinity) [ (2plost)^(n) - plost^(n) ] \
-$
-Recall that the geometric series $sum_(run = 0)^(infinity) r^(i)$ with $r >= 0$ converges to $ 1/(1-r)$ iff $ r < 1$, else it diverges to $+infinity$; and analogously for $sum_(run = 1)^(infinity) r^(i) = r /(1-r)$. Since $plost < 1$ the second series converges, whereas the first series converges iff $2plost < 1$, that is if the probability $pwin$ to win is strictly bigger than $0.5$:
-$
-"Finite expected bet amount" iff  "prob. to win" pwin > 1/2.
-$
-
-_Thus, if $pwin <= 1/2$, the expected invested amount diverges to infinity_. On the other hand, if $pwin > 1/2$:
-$
-ex(B(X))
-& = inbet  pwin / plost sum_(n = 1)^(infinity) [ (2plost)^(n) - plost^(n) ] \
-& = inbet  pwin / plost [ (2 plost) / (1-2 plost) - plost  / (1-plost) ] \
-& = inbet / (2 pwin - 1).
-$
-Reasonably, the expected invested amount diverges to $+infinity$ as $pwin to 1/2$ from the right, and is equal to $inbet$ if there is certainty to win ($pwin = 1$). The graph of $(1/2, 1] in.rev p mapsto 1 / (2 p - 1) $ is shown below:
-
-#figure(
-  image("figs/martin.png", width: 40%),
-  caption: [
-  Horizontal: probability $pwin$ of each winning Bernoulli event.
-  Vertical: expected bet amount.
-  ],
-)
-#takeaway[
-Whenever a "special" number appears in your results, ask yourself whether it arises from the theory or whether it is imposed by the model at hand. Why is the probability $1/2$ special? Is it a consequence of our modeling choices, like the "doubling" betting strategy, or is it intrinsic to this problem (if there were an outcome more likely than the other, then you would bet on that one)? Try to generalize this scenario to different betting and reward policies, like $b_(n) = alpha b_(n-1)$ and $g_(n) = beta b_(n)$ for some $alpha, beta > 0$.
-]
 
 
+#exercise(name: "Martingale doubling betting system")[See @ex:martingale.]

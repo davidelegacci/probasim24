@@ -21,6 +21,14 @@
 #let probspace = $(jet, events, prob)$
 #let ex = $bb(E)$
 
+#let given = $bar.v$ // for conditional probability
+
+#let pof(x) = $prob(#x)$
+#let probof(x) = $pof(#x)$ // alias
+#let exof(x) = $ex[#x]$
+#let conex(x,y) = $exof(#x given #y)$
+#let conexf(f, x, y) = $exof( #f ( #x , #y) given #y )$
+
 #let card(x) = $|#x|$ // cardinality of finite set
 #let fact(x) = $#x!$ // factorial
 #let perm(k) = $P_#k$ // number of permutations
@@ -29,8 +37,9 @@
 #let choose(n,k) = $binom(#n,#k)$ // chose
 
 
-#let given = $bar.v$ // for conditional probability
 
+
+#let et = $,$ // set theoretical and, intersection
 #let from = $:$
 #let to = $arrow$
 #let mapsto = $arrow.r.long.bar$
@@ -39,9 +48,29 @@
 #let iff = $arrow.l.r.double$
 
 #let var = $X$ // random variable
-#let Var = $"Var"$ // random variable
+#let Var = $"Var"$ // variance
 #let varalt = $Y$ // random variable
 #let val = $x$ // value of random variable
+
+
+#let func = $f$ // generic function
+#let xvar = $X$ // random variable
+#let xval = $x$ // value
+#let xvals = $F$ // value
+
+#let yvar = $Y$ // random variable
+#let yval = $y$ // value
+#let yvals = $G$ // value
+#let yfunc = $g$ // 
+
+#let xev = $xvar = xval$ // event {X = x}
+#let yev = $yvar = yval$ // event {Y = y}
+
+
+
+#let iid = "I.I.D."
+
+
 #let follow = $tilde$
 
 #let values = $F$ // value of random variable
@@ -63,3 +92,7 @@
 #let run = $i$
 
 #let rate = $lambda$
+
+
+
+
