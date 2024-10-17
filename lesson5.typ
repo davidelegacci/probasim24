@@ -30,7 +30,7 @@
 #show: tail => thm-reset-counter-heading-at("exercise-group", 1, tail)
 ////////////////////////
 
-= Theory recap 10.10.24
+= Theory recap 10.10.24 - Conditional law and conditional expectation
 #takeaway[
 All the random variables (RVs) we consider in the following are supposed to be integrable discrete random variables with real values. Recall that
 - the _expected value_ of a random variable $xvar from jet to xvals$ is $exof(xvar) = sum_(xval in xvals)xval pof(xev)$;
@@ -133,6 +133,10 @@ whenever all the RVs involved are integrable.
   - $psi(yval) = sum_(xval in xvals) xval probof(xev given yev) $
   ]
 
+*!to check -----------------------------------------------------------------------*
+$
+exof(exof(xvar given yvar)) = exof(xvar)
+$
 ////////////////////////////////////////////////////////////////////////
 
 
@@ -309,16 +313,6 @@ $
 conex(X, X+Y) = lambda / (lambda + mu) (X+Y).
 $
 
-#exercise(name: "An electronic component has a lifetime...")[See Exercice corrigé 2.6.4. in @jourdainProbabilitesStatistiquePour2018.]
-#figure(
-  image("figs/ex264.png", width: 90%),
-)
-#figure(
-  image("figs/sol264_1.png", width: 60%),
-)
-#figure(
-  image("figs/sol264_2.png", width: 60%),
-)
-
+#exercise(name: "An electronic component has a lifetime...")[See @ex:electrical-component.]
 
 //////////////////////////////////////////////////////////////////

@@ -30,7 +30,7 @@
 #show: tail => thm-reset-counter-heading-at("exercise-group", 1, tail)
 ////////////////////////
 
-= Theory recap 26.9.24
+= Theory recap 26.9.24 - Probability space, dicrete random variables, and distributions
 
 
 
@@ -140,7 +140,7 @@ $
 
 #exercises[]
 
-#exercise(name: "Sum of independent binomial distributions")[Let $var_(i) follow bern(n_i, p)$ with $i in {1,2}$ be independent discrete random variables following the Bernoulli law. Find the law of $var_(1) + var_(2)$.]
+#exercise(name: "Sum of independent binomial distributions")[Let $var_(i) follow bern(n_i, p)$ with $i in {1,2}$ be independent discrete random variables following the Bernoulli law. Find the law of $var_(1) + var_(2)$.]<ex:sum-binomial>
 
 _Hint: c.f. derivation of binomial distribution @jourdainProbabilitesStatistiquePour2018 pag. 16._
 

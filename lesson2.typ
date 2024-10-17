@@ -22,7 +22,7 @@
 #show: tail => thm-reset-counter-heading-at("exercise-group", 1, tail)
 ////////////////////////
 
-= Theory recap 18.9.24
+= Theory recap 18.9.24 - Conditional probability and independence
 
 == Conditional probability
 

@@ -30,7 +30,7 @@
 #show: tail => thm-reset-counter-heading-at("exercise-group", 1, tail)
 ////////////////////////
 
-= Theory recap 3.10.24
+= Theory recap 3.10.24 - Expectation and variance
 Recall from last week that
 #takeaway[
 - $probspace$ with $prob from events to clint$ and $prob(points) = 1$

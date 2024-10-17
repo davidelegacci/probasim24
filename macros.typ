@@ -6,6 +6,7 @@
 
 
 #let R = $bb(R)$ // real numbers
+#let Rinf = $hat(#R)$ // real numbers
 #let clint = $[0,1]$ // closed interval
 #let posR = $#(R)_(>=0)$ // non-negative real numbers
 #let event = $A$ // event
@@ -51,12 +52,16 @@
 #let Var = $"Var"$ // variance
 #let varalt = $Y$ // random variable
 #let val = $x$ // value of random variable
+#let lval = $a$ // low value of random variable
+#let hval = $b$ // high value of random variable
+#let intev = ${lval < var <= hval}$ // interval event
 
 
 #let func = $f$ // generic function
 #let xvar = $X$ // random variable
 #let xval = $x$ // value
 #let xvals = $F$ // value
+#let rvals = $#R$ // real values
 
 #let yvar = $Y$ // random variable
 #let yval = $y$ // value
@@ -66,7 +71,8 @@
 #let xev = $xvar = xval$ // event {X = x}
 #let yev = $yvar = yval$ // event {Y = y}
 
-
+#let pdf = $rho$ // probability density
+#let cum = $F$ // cumulative distribution
 
 #let iid = "I.I.D."
 
@@ -76,11 +82,15 @@
 #let values = $F$ // value of random variable
 #let bvalues = $ {0,1}$ // Bernoulli values
 
+
 #let N = $cal(N)$
 
 #let bern = $cal(B)$
 #let poiss = $cal(P)$
 #let geo = $cal(G)$
+
+#let unipdf = $cal(U)$
+#let expdf = $cal(E)$
 
 #let F = $cal(F)$
 #let Y = $cal(Y)$
@@ -93,6 +103,11 @@
 
 #let rate = $lambda$
 
+#let ind = $bb(1)$ // indicator function
+
+#let conv = $ast$
 
 
 
+#let dx = $d x$
+#let dy = $d y$

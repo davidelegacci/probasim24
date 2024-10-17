@@ -18,7 +18,7 @@
 )
 ////////////////////////
 
-= Theory recap 11.9.24
+= Theory recap 11.9.24 - Probability on finite set
 
 - _Jet set_ $jet =$  finite set of possible outcomes $outcome$
 
