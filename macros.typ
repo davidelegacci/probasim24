@@ -73,6 +73,7 @@
 
 #let pdf = $rho$ // probability density
 #let cum = $F$ // cumulative distribution
+#let cdf = $cum$ // alias
 
 #let iid = "I.I.D."
 
@@ -91,6 +92,9 @@
 
 #let unipdf = $cal(U)$
 #let expdf = $cal(E)$
+#let norpdf = $cal(N)$
+#let norex = $mu$
+#let norvar = $sigma^(2)$
 
 #let F = $cal(F)$
 #let Y = $cal(Y)$
@@ -104,6 +108,8 @@
 #let rate = $lambda$
 
 #let ind = $bb(1)$ // indicator function
+
+#let indof(foo) = $ind_{foo}$
 
 #let conv = $ast$
 

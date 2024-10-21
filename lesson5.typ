@@ -313,6 +313,17 @@ $
 conex(X, X+Y) = lambda / (lambda + mu) (X+Y).
 $
 
-#exercise(name: "An electronic component has a lifetime...")[See @ex:electrical-component.]
+#exercise(name: "An electronic component has a lifetime...")[Exercice corrigé 2.6.4. in @jourdainProbabilitesStatistiquePour2018.]<ex:electrical-component>
 
+#figure(
+  image("figs/ex264.png", width: 90%),
+)
+#pagebreak()
+#figure(
+  image("figs/sol264_1.png", width: 70%),
+)
+#figure(
+  image("figs/sol264_2.png", width: 70%),
+)
+#pagebreak()
 //////////////////////////////////////////////////////////////////
