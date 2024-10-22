@@ -106,9 +106,9 @@ $]<th:transfert>
   $
   exof(h(func(xvar)))
   & = integral_(rvals) h compose func (x) pdf_(xvar)(x) dx \
-  & = integral_(rvals) h(x) pdf_(func(xvar))(x) dx
+  & = integral_(rvals) h(f(x)) pdf_(func(xvar))(x) dx
   $
-  So if we can cast the first integral into the second, usually by a change of variables, we can read off $pdf_(func(xvar))$.
+  So if we can cast the first integral into the second, usually by the change of variables $y = f(x)$, we can read off $pdf_(func(xvar))$.
 ]
 #example[Let $xvar from points to rvals follow pdf_(xvar)$ with $pdf_(xvar)(xval) = e^(-x^(2)/2)/(sqrt(2 pi)) $ (cf @normal-distribution). We want to find the pdf of $func(xvar) = e^xvar$. Let $h from rvals to rvals$ be a test function; then
 #figure(
