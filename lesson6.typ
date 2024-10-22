@@ -102,15 +102,34 @@ $
 exof(func(xvar)) = integral_(rvals^(n)) func(x) pdf_(xvar)(x) dx
 $]<th:transfert>
 #takeaway[
-  This is very useful to find the pdf of a function of a real-valued RV $xvar from points to rvals$. Say we have $xvar follow pdf_(xvar)$, and we are asked to find $pdf_(func(xvar))$ for some $func from rvals to rvals$. Let $h from rvals to rvals$ be a generic test function; then by the transfert theorem
+  This is very useful to find the pdf of a function of a real-valued RV $xvar from points to rvals$. Say we have $xvar follow pdf_(xvar)$, and we are asked to find $pdf_(func(xvar))$ for some $func from rvals to rvals$. Let $h from rvals to rvals$ be a generic test function; then by the transfert theorem, thinking of the function $h compose f$ acting on the RV $xvar$,
+  $
+  exof(h(func(xvar))) = integral_(rvals) h compose func (x) pdf_(xvar)(x) dx.
+  $
+Thinking of the function $h$ acting on the RV $func(xvar)$, $exof(h(func(xvar)))$ is also equal to
+  $
+  exof(h(func(xvar)))  = integral_(rvals) h(y) pdf_(func(xvar))(y) dy
+  $
+  So if we can cast the first integral into the second, usually by the change of variables $y = f(x)$, we can read off $pdf_(func(xvar))$:
   $
   exof(h(func(xvar)))
-  & = integral_(rvals) h compose func (x) pdf_(xvar)(x) dx \
-  & = integral_(rvals) h(f(x)) pdf_(func(xvar))(x) dx
+  & = integral_(rvals) h compose func (x) pdf_(xvar)(x) dx "    change variable: " y = f(x) \
+  & = integral_(im(f)) h(y)  (pdf_(xvar) ( x )) / (f'(x)) dy "    with " x = f^(-1)(y),
   $
-  So if we can cast the first integral into the second, usually by the change of variables $y = f(x)$, we can read off $pdf_(func(xvar))$.
+  meaning by the transfert theorem that the PDF of $func(xvar)$ is
+  $
+  pdf_(func(xvar)) (y) = (pdf_(xvar) ( x )) / (f'(x)) indof(im(func)) (y) "    with " x = f^(-1)(y).
+  $
 ]
 #example[Let $xvar from points to rvals follow pdf_(xvar)$ with $pdf_(xvar)(xval) = e^(-x^(2)/2)/(sqrt(2 pi)) $ (cf @normal-distribution). We want to find the pdf of $func(xvar) = e^xvar$. Let $h from rvals to rvals$ be a test function; then
+- $y = f(x) = e^(x) iff x = ln(y)$
+- $f'(x) = e^(x)$
+- $im(f) = (0, infinity)$
+So
+$
+pdf_(e^(xvar))(y) = (e^(-(ln y)^(2)/2))/sqrt(2 pi) dot 1/y dot ind_((0, infinity))(y)
+$
+We can double-check by performing the changhe of variable in the integral:
 #figure(
   image("figs/transfert_find_pdf.png", width: 90%),
 
@@ -127,7 +146,7 @@ This is a very useful technique to find the CDF of a RV (and hence its PDF, by d
 
 #proposition(name: "Indicator technique to find the CDF")[Let $xvar from points to rvals$ be a real-valued random variable. Then its CDF $cdf_(xvar)(xval) = probof(xvar <= xval)$ is given by the expected value of the indicator function of ${xvar <= xval}$, that is
 $
-cdf_(xvar)(xval) = exof(indof(xvar <= xval))
+cdf_(xvar)(xval) = exof(indof(xvar <= xval)).
 $
 ]<prop:cdf-indicator>
 Before the proof, let's see make sure this is well posed. Consider the RV $xvar from points to rvals$, and fix some $xval in rvals$. Consider real-valued function indicator $indof( <= xval) from rvals to rvals$, defined by $indof( <= xval)(z) = 1 $ if $z <= xval$ and $0$ else. As usual, composing the real-valued function $indof( <= xval)$ with the real-valued RV $xvar$ is itself a random variable, and we denote this random variable by $indof(xvar <= xval) := indof( <= xval)(xvar) from points to rvals$. The expected value of this random variable can then be found by @th:transfert. 
@@ -141,7 +160,7 @@ xval mapsto exof(indof(xvar <= xval))
 $
 which is what we need.
 ]
-#takeaway[To find the PDF of a random variable, try 
+#takeaway[To find the PDF of a _real-valued _random variable, try 
 - first finding the CDF by the indicator technique (@prop:cdf-indicator), 
 - then differentiating (@prop:cdf-pdf). ]
 
@@ -162,7 +181,7 @@ pdf_((xvar, yvar))(xval, yval) = pdf_(xvar)(xval) pdf_(yvar)(yval).
 $]
 
 #takeaway[
-Given the RVs $xvar from points to rvals$ and $yvar from points to rvals$ and the function $func from rvals^(2) to #R$, find the CDF of $func(xvar, yvar)$.
+Given the idependent RVs $xvar from points to rvals$ and $yvar from points to rvals$ and the function $func from rvals^(2) to #R$, find the CDF of $func(xvar, yvar)$.
 $
 z mapsto probof(func(xvar, yvar) <= z)
 & = exof(indof(func(xvar, yvar)<=z))  && "by the indicator technique " \
@@ -174,7 +193,7 @@ Now the problem is solved up to the resolution of an integral, which usually inv
 
 See @cdf-sum-rvs,  @ex:pdf-min, @ex:pdf-sum, @ex:pdf-square for some examples. 
 
-#takeaway[To find the PDF of a function of random variables, try 
+#takeaway[To find the PDF of a _function_ of _independent_ random variables, try 
 - first finding the CDF by the indicator technique (@prop:cdf-indicator), 
 - then differentiating (@prop:cdf-pdf).]
 
@@ -192,7 +211,7 @@ $
 This generalizes to continuous random variables as follows:
 #definition(name: "Convolution")[Let $xvar from points to rvals$ and $yvar from points to rvals$ be continuous random variables with densities $pdf_(xvar), pdf_(yvar)$ respectively. The _convolution_  of $pdf_(xvar)$ and $pdf_(yvar)$ is the function $pdf_(xvar) conv pdf_(yvar) $ defined by 
 $
-pdf_(xvar) conv pdf_(yvar)(z) := integral_(rvals) pdf_(xvar)(xval) pdf_(yvar)(z - xval) dx
+pdf_(xvar) conv pdf_(yvar)(z) := integral_(rvals) pdf_(xvar)(xval) pdf_(yvar)(z - xval) dx.
 $
 ]
 #proposition[If $xvar from points to rvals$ and $yvar from points to rvals$ are *independent* continuous random variables then the PDF of their sum is the convolution of their PDFs:
@@ -205,7 +224,7 @@ $
 z mapsto probof(xvar + yvar <= z)
 & = exof(indof(xvar + yvar<=z))  && "by the indicator technique " \
 & = integral_(rvals^(2)) indof(xval + yval <= z) (xval, yval) pdf_(xvar, yvar)(xval, yval) d x d y  && "by transfert theorem" \
-& = integral_(rvals^(2)) indof(xval + yval <= z) (xval, yval) pdf_(xvar)(xval) pdf_(yvar)(yval) d x d y  && "by independence" \
+& = integral_(rvals^(2)) indof(xval + yval <= z) (xval, yval) pdf_(xvar)(xval) pdf_(yvar)(yval) d x d y  && "by independence". \
 $<cdf-sum-rvs>
 Now one needs to set the correct domain of integration: the indicator function $indof(xval + yval <= z) (xval, yval)$ is $1$ when $xval + yval <= z$, and $0$ elsewhere. This means $xval in (-infinity, +infinity)$ and  $yval in (-infinity, z - xval)$ - see @fig:indicator.
 
