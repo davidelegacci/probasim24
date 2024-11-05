@@ -31,6 +31,7 @@
 ////////////////////////
 
 = Theory recap 10.10.24 - Conditional law and conditional expectation
+<lesson:conditional-law>
 #takeaway[
 All the random variables (RVs) we consider in the following are supposed to be integrable discrete random variables with real values. Recall that
 - the _expected value_ of a random variable $xvar from jet to xvals$ is $exof(xvar) = sum_(xval in xvals)xval pof(xev)$;

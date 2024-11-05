@@ -33,12 +33,13 @@
 = Theory recap (17 + 24).10.24 - Continuous random variables
 <th-recap-6>
 
-== PDF and CDF
+== PDF, CDF, expected value, variance for scalar random variables
 
 *Notation* Consider a probability space $probspace$, a function $var from points to #R$, and two points $lval < hval in #Rinf$, with $Rinf = #R union {-infinity, +infinity}$. We use the following notation:
 $
 intev 
-:= { & point in points: var(point) <= hval } sect { point in points: var(point) > lval }  \
+:= { & point in points: var(point) in (lval, hval] }  \
+equiv { & point in points: var(point) <= hval } sect { point in points: var(point) > lval }  \
 equiv { & point in points: var(point) <= hval } without { point in points: var(point) <= lval }.
 $<eq:interval-event>
 Note that $intev$ is a subset of $jet$, and recall that a subset of $jet$ is an _event_ if it belongs to $events$.
@@ -46,7 +47,7 @@ Note that $intev$ is a subset of $jet$, and recall that a subset of $jet$ is an 
 #definition(name: "Continuous random variable")[Given a probability space $probspace$, a _continuous random variable_ $var$ is a function $var from points to #R$ such that $intev$ is an event for all $lval < hval in Rinf$.
 ]
 
-#definition(name: "Probability density function")[The _probability density function (PDF)_ of a continuous random variable $var from jet to rvals$ is the function $pdf_(var) from rvals to #R _(>=0)  $ such that, for all $lval < hval in Rinf$,
+#definition(name: "Probability density function - scalar")[The _probability density function (PDF)_ of a continuous random variable $var from jet to rvals$ is the function $pdf_(var) from rvals to #R _(>=0)  $ such that, for all $lval < hval in Rinf$,
 $
 prob intev = integral_(lval)^(hval) pdf_(var)(x) dx.
 $
@@ -60,11 +61,11 @@ $
 cum_(var)(val) = probof(var <= val).
 $
 ]
-#proposition(name: "PDF = CDF'")[The probability density function $pdf_(var)$ of a continuous random variable $var from points to rvals$ can be determined from the cumulative distribution function $cum_(var)$ by differentiating:
+#proposition(name: "PDF = CDF'")[The probability density function $pdf_(var)$ of a continuous random variable $var from points to rvals$ can be determined from the cumulative distribution function $cum_(var)$ by differentiating (as long as the derivative exists):
 $
 pdf_(var) = cum'_(var)
 $
-as long as the derivative exists.
+
 ]<prop:cdf-pdf>
 #proof[By @eq:interval-event, $sigma$-additivity, and the fundamental theorem of integral calculus,
 
@@ -76,33 +77,64 @@ prob intev
 $
 ]
 
-#takeaway[
-  - integral of PDF gives probability to observe RV in an integral
-  - CDF gives probability to observe RV below a value 
-  - $"PDF" = "CDF"'$
-]
-
-
-== Expected value, Théorème de transfert, variance
 
 #definition[
-  The _expected value_ of a RV $xvar from points to rvals$ with PDF $pdf_(xvar)$ is
+  The _expected value_ and _variance_ of a RV $xvar from points to rvals$ with PDF $pdf_(xvar)$ are
 $
-exof(xvar) = integral_(rvals) xval  pdf_(xvar)(xval) d xval
+exof(xvar) = integral_(rvals) xval  pdf_(xvar)(xval) d xval.
+$
+$
+Var(xvar) = exof( (xvar - exof(xvar))^(2) ) = exof(xvar^(2)) - exof(xvar)^(2).
 $
 ]
-- Let now $xvar$ be a vector-valued random variable, $xvar from points to rvals^(n)$
-- Let $func from rvals^(n) to #R$ be a real-valued function.
-- This defines the real-valued random variable $func(xvar) from points to rvals$
-- For example, if $func from rvals^(2) to rvals$ is $f(a,b) = a+b$ then $func(xvar, yvar) = xvar + yvar$ is a RV. 
 
-We have the following generalization of the "Théorème de transfert":
-#theorem(name: "Théorème de transfert vectoriel")[The random variable $xvar from points to rvals^(n)$ has the probability density function $pdf_(xvar)$ if and only if
+#takeaway[
+  - integral of PDF gives probability to observe RV in an interval
+  - CDF gives probability to observe RV below a value 
+  - $"PDF" = "CDF"'$
+  - $exof(xvar) = integral_(rvals) xval  " PDF"_(xvar)(xval) d xval.$
+]
+
+//---------------------------------------------------------------------------------------------
+== Vector-valued random variable
+
+Given a probability space $probspace$ let now $xvar$ be a *vector-valued random variable*, that is a map $xvar from points to rvals^(n)$ such that $openev :={ point in points: var(point) in openvals }$ is an event for all open $openvals subset.eq vectorvals$.
+
+
+#definition(name: "Probability density function - vector")[The _probability density function (PDF)_ of a vector-valued RV $var from jet to vectorvals$ is the function $pdf_(var) from vectorvals to #R _(>=0)  $ s.t., for all open $openvals subset.eq vectorvals$,
 $
-exof(func(xvar)) = integral_(rvals^(n)) func(x) pdf_(xvar)(x) dx
+prob openev = integral_(openvals) pdf_(var)(x) dx = integral_(vectorvals) ind_(openvals)(x) pdf_(var)(x) dx.
+$
+]
+
+
+=== Real-valued RVs as function of vector-valued RVs
+<sec-vector-valued-rv>
+
+- Let $xvar from points to vectorvals$ be a vector-valued random variable
+- Let $func from rvals^(n) to #R$ be a real-valued function.
+- By composition one can build the *real-valued *random variable $func(xvar) from points to rvals$
+
+*Example*
+
+
+- Let $xvar from points to rvals$ and $yvar from points to rvals$ be continuous real-valued random variables.
+- Together they make the vector-valued random variable $(xvar,yvar) from points to rvals^(2)$. 
+- Let now $func from rvals^(2) to #R$ be a real-valued function, say $f(a,b) = a+b$
+- Then $func(xvar, yvar) = xvar + yvar from points to rvals$ is a real-valued random variable.
+
+=== Théorème de transfert / Méthode de la fonction muette
+
+We have the following generalization of the "Théorème de transfert" concerning the expected value of a real-valued random variable obtained as the composition of a vector-valued random variable with a real-valued function:
+
+
+
+#theorem(name: "Théorème de transfert vectoriel")[The vector-valued random variable $xvar from points to rvals^(n)$ has the probability density function $pdf_(xvar)$ if and only if, for any bounded function $func from vectorvals to rvals$, the real-valued random variable $func(xvar) from points to rvals$ has expected value
+$
+exof(func(xvar)) = integral_(rvals^(n)) func(x) pdf_(xvar)(x) dx.
 $]<th:transfert>
 #takeaway[
-  This is very useful to find the pdf of a function of a real-valued RV $xvar from points to rvals$. Say we have $xvar follow pdf_(xvar)$, and we are asked to find $pdf_(func(xvar))$ for some $func from rvals to rvals$. Let $h from rvals to rvals$ be a generic test function; then by the transfert theorem, thinking of the function $h compose f$ acting on the RV $xvar$,
+@th:transfert is very useful to find the pdf of a function of a real-valued RV $xvar from points to rvals$. Say we have $xvar follow pdf_(xvar)$, and we are asked to find $pdf_(func(xvar))$ for some $func from rvals to rvals$. Let $h from rvals to rvals$ be a generic test function; then by the transfert theorem, thinking of the function $h compose f$ acting on the RV $xvar$,
   $
   exof(h(func(xvar))) = integral_(rvals) h compose func (x) pdf_(xvar)(x) dx.
   $
@@ -135,21 +167,18 @@ We can double-check by performing the changhe of variable in the integral:
 
 )
 ]
-#definition(name: "variance")[
-  The _variance_ of the RV $xvar from points to rvals$ is 
-$
-Var(xvar) = exof(xvar^(2)) - exof(xvar)^(2)
-$
-]
-== Relation between CDF and expected value
-This is a very useful technique to find the CDF of a RV (and hence its PDF, by differentiating) by expressing the CDF as the expectation of a function (in particular, and indicator function), that can be computed  by @th:transfert.
+
+//---------------------------------------------------------------------------------------------
+
+== Indicator technique to find the CDF - scalar case
+There exists a very useful technique to find the CDF of a RV (and hence its PDF, by differentiating) by expressing the CDF as the expectation of an indicator function, that can be computed by @th:transfert.
 
 #proposition(name: "Indicator technique to find the CDF")[Let $xvar from points to rvals$ be a real-valued random variable. Then its CDF $cdf_(xvar)(xval) = probof(xvar <= xval)$ is given by the expected value of the indicator function of ${xvar <= xval}$, that is
 $
 cdf_(xvar)(xval) = exof(indof(xvar <= xval)).
 $
 ]<prop:cdf-indicator>
-Before the proof, let's see make sure this is well posed. Consider the RV $xvar from points to rvals$, and fix some $xval in rvals$. Consider real-valued function indicator $indof( <= xval) from rvals to rvals$, defined by $indof( <= xval)(z) = 1 $ if $z <= xval$ and $0$ else. As usual, composing the real-valued function $indof( <= xval)$ with the real-valued RV $xvar$ is itself a random variable, and we denote this random variable by $indof(xvar <= xval) := indof( <= xval)(xvar) from points to rvals$. The expected value of this random variable can then be found by @th:transfert. 
+Before the proof, let's see make sure this is well posed. Consider the RV $xvar from points to rvals$, and fix some $xval in rvals$. Consider the real-valued indicator function $indof( <= xval) from rvals to rvals$, defined by $indof( <= xval)(z) = 1 $ if $z <= xval$ and $0$ else. As usual, composing the real-valued function $indof( <= xval)$ with the real-valued RV $xvar$ is itself a random variable, and we denote this random variable by $indof(xvar <= xval) := indof( <= xval)(xvar) from points to rvals$. The expected value of this random variable can then be found by @th:transfert. 
 #proof[ Let $xval in rvals$ and consider the function
 $
 xval mapsto exof(indof(xvar <= xval)) 
@@ -164,13 +193,16 @@ which is what we need.
 - first finding the CDF by the indicator technique (@prop:cdf-indicator), 
 - then differentiating (@prop:cdf-pdf). ]
 
-== PDF of function of random variables
-The techniqueo of the previous secion generalizes to real-valued functions of random variables. We present the idea for $2$ RVs, but it readily generalises to $n$.
-- Let $xvar from points to rvals$ and $yvar from points to rvals$ be continuous random variables.
-- Together they make the random variable $(xvar,yvar) from points to rvals^(2)$. 
-- Let now $func from rvals^(2) to #R$ be a real-valued function.
-- As usual, $func(xvar, yvar) from points to #R$ is a real-valued random variable.
-- For example, if $func from rvals^(2) to rvals$ is $f(a,b) = a+b$ then $func(xvar, yvar) = xvar + yvar$ is a RV. 
+
+//---------------------------------------------------------------------------------------------
+
+==  Indicator technique to find the CDF - vector case
+The technique of the previous secion generalizes to real-valued functions of vector-valued random variables. We present the idea for $2$ RVs, but it readily generalises to $n$.
+
+As in @sec-vector-valued-rv, 
+- Let $xvar from points to vectorvals$ be a vector-valued random variable
+- Let $func from rvals^(n) to #R$ be a real-valued function.
+- By composition one can build the *real-valued *random variable $func(xvar) from points to rvals$
 - We can use the indicator technique (@prop:cdf-indicator) to find the CDF of $func(xvar, yvar)$, and
 - differentiate it (@prop:cdf-pdf) to find the PDF of $func(xvar, yvar)$.
 

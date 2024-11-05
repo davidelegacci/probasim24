@@ -57,11 +57,20 @@
 #let intev = ${lval < var <= hval}$ // interval event
 
 
+
 #let func = $f$ // generic function
 #let xvar = $X$ // random variable
 #let xval = $x$ // value
 #let xvals = $F$ // value
 #let rvals = $#R$ // real values
+#let pdfvals= $#R _(>=0)$ // non-negative reals
+#let dimvals = $n$ // dimension of vector values
+#let vectorvals = $#R^(dimvals)$ // vector values
+#let vecxvals = $#R^(dimvals_(1))$ // vector values
+#let vecyvals = $#R^(dimvals_(2))$ // vector values
+#let openvals = $D$ // open in vector values
+#let openev = ${var in openvals}$ // open event
+
 
 #let yvar = $Y$ // random variable
 #let yval = $y$ // value
