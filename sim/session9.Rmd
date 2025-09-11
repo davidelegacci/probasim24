@@ -291,3 +291,27 @@ p_K=mean(df_parties$sum==1 | df_parties$sum==K-1);
 p_K
 ```
 Notice that the theoretical value is $\frac{`r K` }{ 2^{`r K-1`} } = `r K / (2^(K-1))`$.
+
+## Betting on cards (c.f. ex. 2.3)
+
+N = 10
+
+- 1 = red, red hidden --> observe red
+- 2 = red, red hidden --> observe red
+- 3 = mixed, white hidden --> observe red
+- 4 = white, white hidden --> observe white
+- 5 = white, white hidden --> observe white
+- 6 = mixed, red hidden --> observe white
+
+
+```{r}
+N=100000
+
+S=sample(x=1:6,size=N,replace=T)
+
+prob = length( S[S %in% c(1, 2, 3) & S %in% c(1, 2, 6)] ) / length( S[S %in% c(1, 2, 6)] )
+
+print(prob)
+
+```
+
