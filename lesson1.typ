@@ -20,6 +20,7 @@
 
 = Theory recap 11.9.24 - Probability on finite set
 
+Hello world
 - _Jet set_ $jet =$  finite set of possible outcomes $outcome$
 
 - _Probability_ on $jet = $  set of weights $prob(outcome) in bb(R)$ on each $outcome in jet$ such that

@@ -56,7 +56,6 @@ Last updated: #today.display(). Info: davide.legacci`@`univ-grenoble-alpes.fr
 
 #include "lesson7.typ"
 
-
 #include "lesson8.typ"
 
 #include "lesson9.typ"
